@@ -11,3 +11,20 @@
   Restaurant.create(name: "Restaurant C", address: "Adresse C", phone_number: "789", category: "japanese")
   Restaurant.create(name: "Restaurant D", address: "Adresse D", phone_number: "101112", category: "french")
   Restaurant.create(name: "Restaurant E", address: "Adresse E", phone_number: "131415", category: "belgian")
+
+  5.times do
+    restaurant = Restaurant.create(
+      name: Faker::Restaurant.name,
+      address: Faker::Address.street_address,
+      phone_number: Faker::PhoneNumber.cell_phone,
+      category: ["chinese", "italian", "japanese", "french", "belgian"].sample
+    )
+    2.times do
+      review = Review.create(
+        rating: [*0..5].sample,
+        content: Faker::Restaurant.review,
+        restaurant: restaurant
+      )
+    end
+  end
+
